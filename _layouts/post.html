@@ -1,65 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title }} | {{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
-  <meta property="og:title" content="{{ page.title }}">
-  <meta property="og:description" content="{{ page.description | strip_html | truncate: 160 }}">
-  {% if page.image %}<meta property="og:image" content="{{ page.image | absolute_url }}">{% endif %}
-  <link rel="icon" type="image/png" href="{{ '/images/favicon.png' | relative_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
+{% include site-head.html %}
   <script>
     window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] } };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="home" href="{{ '/' | relative_url }}"><i class="fa-solid fa-arrow-left"></i> Lameya Islam</a>
-    <a class="all" href="{{ '/blog/' | relative_url }}">Blog</a>
-  </header>
+  <div id="wrapper">
+    {% include site-nav.html %}
 
-  <main class="post">
-    {% if page.series %}
-      {% assign series_posts = site.posts | where: "series", page.series | sort: "part" %}
-      <p class="kicker"><a href="{{ '/blog/llm-from-scratch/' | relative_url }}">{{ page.series_title }}</a> · Part {{ page.part }} of {{ series_posts.size }}</p>
-    {% endif %}
-    <h1>{{ page.title }}</h1>
-    {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
-    {% assign words = content | number_of_words %}
-    <p class="meta">
-      {{ page.date | date: "%B %-d, %Y" }} · {{ words | divided_by: 200 | plus: 1 }} min read
-      {% if page.code %} · <a href="{{ page.code }}"><i class="fa-brands fa-github"></i> code for this part</a>{% endif %}
-    </p>
+    <div id="main">
+      <article class="panel blog-panel">
+        {% assign series_posts = site.posts | where: "series", page.series | sort: "part" %}
+        <header>
+          {% if page.series %}
+          <p class="kicker"><a href="{{ '/blog/llm-from-scratch/' | relative_url }}">{{ page.series_title }}</a> · Part {{ page.part }} of {{ series_posts.size }}</p>
+          {% endif %}
+          <h1>{{ page.title }}</h1>
+          {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+          {% assign words = content | number_of_words %}
+          <p class="meta">
+            {{ page.date | date: "%B %-d, %Y" }} · {{ words | divided_by: 200 | plus: 1 }} min read
+            {% if page.code %} · <a href="{{ page.code }}"><i class="fa-brands fa-github"></i> code for this part</a>{% endif %}
+          </p>
+        </header>
 
-    {% if page.series %}{% include series-nav.html %}{% endif %}
+        {% if page.series %}{% include series-nav.html %}{% endif %}
 
-    <article class="content">
-      {{ content }}
-    </article>
+        <div class="content">
+          {{ content }}
+        </div>
 
-    {% if page.series %}
-      <nav class="prev-next">
-        {% assign prev_part = page.part | minus: 1 %}
-        {% assign next_part = page.part | plus: 1 %}
-        {% for p in series_posts %}
-          {% if p.part == prev_part %}<a class="prev" href="{{ p.url | relative_url }}"><span>← Part {{ p.part }}</span>{{ p.title }}</a>{% endif %}
-          {% if p.part == next_part %}<a class="next" href="{{ p.url | relative_url }}"><span>Part {{ p.part }} →</span>{{ p.title }}</a>{% endif %}
-        {% endfor %}
-      </nav>
-    {% endif %}
-  </main>
+        {% if page.series %}
+          <nav class="prev-next">
+            {% assign prev_part = page.part | minus: 1 %}
+            {% assign next_part = page.part | plus: 1 %}
+            {% for p in series_posts %}
+              {% if p.part == prev_part %}<a class="prev" href="{{ p.url | relative_url }}"><span>← Part {{ p.part }}</span>{{ p.title }}</a>{% endif %}
+              {% if p.part == next_part %}<a class="next" href="{{ p.url | relative_url }}"><span>Part {{ p.part }} →</span>{{ p.title }}</a>{% endif %}
+            {% endfor %}
+          </nav>
+        {% endif %}
+      </article>
+    </div>
 
-  <footer class="site-footer">
-    © {{ 'now' | date: "%Y" }} Lameya Islam ·
-    <a href="https://github.com/ilameya">GitHub</a> ·
-    <a href="https://linkedin.com/in/ilameya">LinkedIn</a>
-  </footer>
+    <div id="footer">
+      <ul class="copyright">
+        <li>&copy; Lameya Islam</li>
+      </ul>
+    </div>
+  </div>
   <script src="{{ '/assets/js/blog.js' | relative_url }}"></script>
 </body>
 </html>

@@ -1,125 +1,95 @@
-/* Blog styles for ilameya.github.io: a calm reading layout that matches the portfolio's greys. */
-:root {
-  --bg: #ffffff;
-  --surface: #f6f6f4;
-  --ink: #222222;
-  --ink-2: #52514e;
-  --muted: #8a8984;
-  --line: #e6e5e1;
-  --accent: #2a78d6;
-  --accent-soft: #e8f1fc;
-  --warn-soft: #fdf3dc;
-  --warn: #c98500;
-  --code-bg: #f6f6f4;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1a19; --surface: #232321; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #8f8e88;
-    --line: #34332f; --accent: #6aa5ee; --accent-soft: #1f2d40; --warn-soft: #2f2817; --warn: #e0a33a;
-    --code-bg: #232321;
-  }
-  /* diagrams and figures are drawn on white: give them a white card in dark mode */
-  .content img { background: #fff; }
-}
+/* Blog styles for ilameya.github.io.
+   Loaded AFTER the portfolio's main.css, so the background, Source Sans Pro font, white panel,
+   icon nav and footer all come from the portfolio itself. This file only adds what long-form
+   posts need (code, tables, figures, callouts, series navigation), in the same grey palette. */
 
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0; background: var(--bg); color: var(--ink);
-  font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', sans-serif;
-  font-size: 19px; line-height: 1.7;
+/* The portfolio panel is a fixed-height card; blog panels grow with their content. */
+#main > .panel.blog-panel { padding: 3em 3em 2.5em 3em; }
+@media screen and (max-width: 736px) { #main > .panel.blog-panel { padding: 2em 1.25em 1.5em 1.25em; } }
+
+.blog-panel header { margin-bottom: 1.5em; }
+.blog-panel h1 { font-size: 1.9em; line-height: 1.2; margin: 0.1em 0 0.35em; }
+.blog-panel header h2 { margin-bottom: 0.2em; }
+.blog-panel header > p { color: #999; }
+.blog-panel .kicker {
+  margin: 0 0 0.3em; font-size: 0.7em; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa;
 }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+.blog-panel .subtitle { font-size: 1.05em; color: #888; margin: 0 0 0.6em; line-height: 1.6; }
+.blog-panel .meta { font-size: 0.75em; color: #aaa; margin: 0; }
 
-.site-header, .site-footer {
-  max-width: 760px; margin: 0 auto; padding: 22px 16px; display: flex; justify-content: space-between;
-  font-size: 16px; color: var(--muted);
+.blog-panel a { color: #363636; border-bottom: dotted 1px #bbb; text-decoration: none; transition: color .2s, border-color .2s; }
+.blog-panel a:hover { color: #000; border-bottom-color: transparent; }
+
+/* Body text: the portfolio's font and greys, a touch darker for comfortable long reading */
+.blog-panel .content { color: #666; }
+.blog-panel .content p, .blog-panel .content ul, .blog-panel .content ol,
+.blog-panel .content table, .blog-panel .content blockquote { margin-bottom: 1.25em; }
+.blog-panel .content h2 { font-size: 1.4em; margin: 1.8em 0 0.6em; }
+.blog-panel .content h3 { font-size: 1.1em; margin: 1.5em 0 0.5em; }
+.blog-panel .content li { margin-bottom: 0.3em; }
+.blog-panel .content hr { margin: 2em 0; }
+
+/* Figures */
+.blog-panel .content img { display: block; max-width: 100%; height: auto; margin: 1.5em auto 0.4em; cursor: zoom-in; }
+.blog-panel .content img + em { display: block; text-align: center; color: #aaa; font-size: 0.75em; margin-bottom: 1.5em; line-height: 1.5; }
+
+/* Blockquotes and "Try it" / "Exercise" callouts (blog.js adds the .try class) */
+.blog-panel .content blockquote {
+  font-style: normal; background: #f8f8f8; border-left: solid 0.3em #ddd; padding: 0.8em 1.2em; border-radius: 0 6px 6px 0;
 }
-.site-header a { color: var(--ink-2); font-weight: 600; }
-.site-footer { border-top: 1px solid var(--line); margin-top: 64px; justify-content: center; gap: 6px; }
+.blog-panel .content blockquote p { margin: 0.2em 0; }
+.blog-panel .content blockquote.try { background: #fbf8f1; border-left-color: #d8c49a; }
 
-.post, .listing { max-width: 760px; margin: 0 auto; padding: 0 16px; }
-.kicker { margin: 24px 0 4px; font-size: 15px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
-.post h1, .listing h1 { font-size: 2.3em; line-height: 1.15; margin: 4px 0 10px; letter-spacing: -0.01em; }
-.subtitle { font-size: 1.2em; color: var(--ink-2); margin: 0 0 8px; }
-.meta { color: var(--muted); font-size: 15px; margin: 0 0 18px; }
+/* Tables */
+.blog-panel .content table { font-size: 0.85em; display: block; overflow-x: auto; border-collapse: collapse; }
+.blog-panel .content th, .blog-panel .content td { border-bottom: solid 1px #eee; padding: 0.5em 0.8em; text-align: left; vertical-align: top; }
+.blog-panel .content th { color: #363636; font-weight: 400; border-bottom-width: 2px; }
 
-.content h2 { font-size: 1.55em; margin: 2.1em 0 .5em; line-height: 1.25; }
-.content h3 { font-size: 1.2em; margin: 1.7em 0 .4em; }
-.content p, .content li { color: var(--ink); }
-.content img { display: block; max-width: 100%; height: auto; margin: 1.6em auto .4em; border-radius: 8px; }
-.content img[src$=".svg"] {
-  /* diagrams are drawn wide: let them break out of the text column on large screens */
-  width: auto; max-width: min(1060px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%);
+/* Code */
+.blog-panel code, .blog-panel pre { font-family: Menlo, Consolas, 'DejaVu Sans Mono', monospace; }
+.blog-panel :not(pre) > code { background: #f4f4f4; padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.78em; color: #363636; }
+.blog-panel pre {
+  background: #f8f8f8; border: solid 1px #eee; border-radius: 8px; padding: 1em 1.1em; overflow-x: auto;
+  font-size: 0.68em; line-height: 1.6; color: #363636; margin: 0 0 1.25em;
 }
-.content img { cursor: zoom-in; }
-.content img + em, .content .caption { display: block; text-align: center; color: var(--muted); font-size: 15px; margin-bottom: 1.6em; }
-.content blockquote {
-  margin: 1.5em 0; padding: .7em 1.1em; background: var(--accent-soft); border-left: 4px solid var(--accent);
-  border-radius: 0 8px 8px 0; color: var(--ink);
-}
-.content blockquote p { margin: .3em 0; }
-.content table { border-collapse: collapse; width: 100%; margin: 1.4em 0; font-size: 16px; display: block; overflow-x: auto; }
-.content th, .content td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
-.content th { color: var(--ink-2); font-weight: 600; }
-.content hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
-
-/* callouts: > **Try it:** ... are styled by blog.js */
-.content blockquote.try { background: var(--warn-soft); border-left-color: var(--warn); }
-
-code, pre { font-family: 'JetBrains Mono', Menlo, Consolas, monospace; font-size: 15px; }
-:not(pre) > code { background: var(--code-bg); padding: 2px 6px; border-radius: 5px; font-size: .85em; }
-.highlight { position: relative; }
-pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; line-height: 1.55; }
+.blog-panel .highlight { position: relative; }
+.blog-panel div.highlight > pre, .blog-panel pre.highlight { margin-bottom: 1.25em; }
 .copy-btn {
-  position: absolute; top: 8px; right: 8px; font: 600 12px 'Source Sans 3', sans-serif; color: var(--ink-2);
-  background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 3px 9px; cursor: pointer; opacity: 0;
-  transition: opacity .15s;
+  position: absolute; top: 0.5em; right: 0.5em; font: 400 0.6em 'Source Sans Pro', sans-serif; color: #777;
+  background: #fff; border: solid 1px #ddd; border-radius: 4px; padding: 0.15em 0.7em; cursor: pointer; opacity: 0; transition: opacity .15s;
 }
 .highlight:hover .copy-btn, .copy-btn:focus { opacity: 1; }
 
-/* rouge syntax colours (light / dark) */
-.highlight .c, .highlight .c1, .highlight .cm, .highlight .sd { color: #8a8984; font-style: italic; }
-.highlight .k, .highlight .kn, .highlight .kd, .highlight .ow, .highlight .kc { color: #6250d6; font-weight: 600; }
-.highlight .s, .highlight .s1, .highlight .s2, .highlight .si, .highlight .sa { color: #1a8a5f; }
-.highlight .mi, .highlight .mf, .highlight .m { color: #c25a1d; }
-.highlight .nf, .highlight .nc, .highlight .fm { color: #2a78d6; font-weight: 600; }
-.highlight .nb, .highlight .bp { color: #b5367a; }
-.highlight .o { color: #52514e; }
-@media (prefers-color-scheme: dark) {
-  .highlight .k, .highlight .kn, .highlight .kd, .highlight .ow, .highlight .kc { color: #a99ff0; }
-  .highlight .s, .highlight .s1, .highlight .s2, .highlight .si, .highlight .sa { color: #5cc99a; }
-  .highlight .mi, .highlight .mf, .highlight .m { color: #f0a070; }
-  .highlight .nf, .highlight .nc, .highlight .fm { color: #6aa5ee; }
-  .highlight .nb, .highlight .bp { color: #ee8cbf; }
-  .highlight .o { color: #c3c2b7; }
-}
+/* Syntax colours: muted, to stay within the portfolio's calm palette */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .sd { color: #999; font-style: italic; }
+.highlight .k, .highlight .kn, .highlight .kd, .highlight .ow, .highlight .kc { color: #5b4bb7; }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .si, .highlight .sa { color: #2d7d5a; }
+.highlight .mi, .highlight .mf, .highlight .m { color: #b5532a; }
+.highlight .nf, .highlight .nc, .highlight .fm { color: #2a6bb8; }
+.highlight .nb, .highlight .bp { color: #a3437a; }
 
-.series-nav { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 16px; margin: 0 0 28px; font-size: 16px; }
-.series-nav summary { cursor: pointer; font-weight: 600; color: var(--ink-2); }
-.series-nav ol { margin: 10px 0 4px; padding-left: 22px; }
-.series-nav li.current span { font-weight: 700; color: var(--ink); }
+/* "All parts of the series" box */
+.series-nav { background: #f8f8f8; border: solid 1px #eee; border-radius: 8px; padding: 0.6em 1.1em; margin: 0 0 1.75em; font-size: 0.8em; }
+.series-nav summary { cursor: pointer; color: #363636; }
+.series-nav ol { margin: 0.6em 0 0.2em; }
+.series-nav li { padding-left: 0.25em; }
+.series-nav li.current span { color: #363636; font-weight: 400; }
+.series-nav a { border-bottom: 0; color: #777; }
+.series-nav a:hover { color: #363636; }
 
-.prev-next { display: flex; gap: 14px; margin: 56px 0 0; }
+/* Previous / next */
+.prev-next { display: flex; gap: 0.8em; margin: 2.5em 0 0; }
 .prev-next a {
-  flex: 1; border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; color: var(--ink); font-weight: 600; font-size: 16px;
+  flex: 1; border: solid 1px #eee; border-radius: 10px; padding: 0.8em 1em; color: #363636; font-size: 0.85em; line-height: 1.4;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
-.prev-next a span { display: block; color: var(--muted); font-weight: 400; font-size: 14px; }
+.prev-next a span { display: block; color: #aaa; font-size: 0.85em; margin-bottom: 0.2em; }
 .prev-next .next { text-align: right; margin-left: auto; }
-.prev-next a:hover { border-color: var(--accent); text-decoration: none; }
+.prev-next a:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10); border-bottom-color: #eee; }
+@media screen and (max-width: 736px) { .prev-next { flex-direction: column; } }
 
-/* listing pages */
-.post-list { list-style: none; padding: 0; margin: 24px 0; }
-.post-list li { border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; }
-.post-list li:hover { border-color: var(--accent); }
-.post-list .num { color: var(--muted); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
-.post-list a.title { display: block; font-size: 1.15em; font-weight: 700; color: var(--ink); margin: 2px 0; }
-.post-list p { margin: 0; color: var(--ink-2); font-size: 16px; }
-.hero-img { width: 100%; border-radius: 10px; margin: 10px 0 20px; background: #fff; }
-
-@media (max-width: 600px) {
-  body { font-size: 17px; }
-  .post h1, .listing h1 { font-size: 1.8em; }
-  .prev-next { flex-direction: column; }
-}
+/* Series cards reuse the portfolio's .pub-card style from the Research panel */
+.blog-panel a.pub-card { border-bottom: solid 1px #eee; color: inherit; }
+.blog-panel a.pub-card:hover { border-bottom-color: #eee; }
+.series-desc { display: block; color: #777; font-size: 0.82em; line-height: 1.55; margin-top: 0.25em; }
+.pub-icon.part-num { font-size: 0.95em; color: #363636; }
