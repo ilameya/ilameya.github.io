@@ -15,13 +15,4 @@ description: Tutorials and notes by Lameya Islam on LLMs, explainable AI and int
   </li>
 </ul>
 
-<h2 style="margin-top:36px">All posts</h2>
-<ul class="post-list">
-  {% for p in site.posts %}
-  <li>
-    <span class="num">{{ p.date | date: "%b %-d, %Y" }}{% if p.series %} · {{ p.series_title }}, part {{ p.part }}{% endif %}</span>
-    <a class="title" href="{{ p.url | relative_url }}">{{ p.title }}</a>
-    <p>{{ p.description }}</p>
-  </li>
-  {% endfor %}
-</ul>
+
