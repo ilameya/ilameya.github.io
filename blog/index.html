@@ -1,0 +1,27 @@
+---
+layout: page
+title: Blog
+description: Tutorials and notes by Lameya Islam on LLMs, explainable AI and intelligent systems.
+---
+<h1>Blog</h1>
+<p class="subtitle">Tutorials and notes on LLMs, explainable AI and intelligent systems.</p>
+
+<h2 style="margin-top:36px">Series</h2>
+<ul class="post-list">
+  <li>
+    <span class="num">8-part series for students</span>
+    <a class="title" href="{{ '/blog/llm-from-scratch/' | relative_url }}">LLMs from Scratch</a>
+    <p>Build a small GPT in PyTorch, one piece at a time: tokenizer, embeddings, attention, transformer blocks, training and sampling.</p>
+  </li>
+</ul>
+
+<h2 style="margin-top:36px">All posts</h2>
+<ul class="post-list">
+  {% for p in site.posts %}
+  <li>
+    <span class="num">{{ p.date | date: "%b %-d, %Y" }}{% if p.series %} · {{ p.series_title }}, part {{ p.part }}{% endif %}</span>
+    <a class="title" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+    <p>{{ p.description }}</p>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,35 @@
+# Jekyll configuration for ilameya.github.io
+# The existing portfolio (index.html) has no front matter, so Jekyll copies it unchanged.
+# This file only switches on the blog: _posts/, _layouts/ and blog/.
+
+title: Lameya Islam
+author: Lameya Islam
+description: Notes and tutorials on LLMs, explainable AI and intelligent systems.
+url: "https://ilameya.github.io"
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+# Publish posts even if their date is in the future (so a whole series can be pushed at once).
+future: true
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - assets/sass
+  - README.md
+  - BLOG_SETUP.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

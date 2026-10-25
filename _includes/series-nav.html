@@ -1,0 +1,11 @@
+{% assign series_posts = site.posts | where: "series", page.series | sort: "part" %}
+<details class="series-nav">
+  <summary>All parts of the series</summary>
+  <ol>
+    {% for p in series_posts %}
+      <li{% if p.url == page.url %} class="current"{% endif %}>
+        {% if p.url == page.url %}<span>{{ p.title }}</span>{% else %}<a href="{{ p.url | relative_url }}">{{ p.title }}</a>{% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</details>
