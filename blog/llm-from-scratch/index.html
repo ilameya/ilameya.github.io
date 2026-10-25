@@ -1,32 +1,25 @@
 ---
 layout: page
 title: "LLMs from Scratch"
-description: "An 8-part series for students: build and train a small GPT in PyTorch and understand every line."
+description: "An 8-part series: build and train a small GPT in PyTorch and understand every line."
 image: /assets/img/llm-from-scratch/01_big_picture.png
 ---
-<header>
-  <p class="kicker"><a href="{{ '/blog/' | relative_url }}">Blog</a> · Series · 8 parts</p>
-  <h2>LLMs from Scratch</h2>
-  <p>Build a small GPT in PyTorch, one piece at a time, and understand every line.</p>
-</header>
+<p class="kicker">Series · 8 parts</p>
+<h1>LLMs from Scratch</h1>
+<p class="subtitle">Build a small GPT in PyTorch, one piece at a time, and understand every line.</p>
+<img class="hero-img" src="{{ '/assets/img/llm-from-scratch/01_big_picture.svg' | relative_url }}" alt="Text goes through a tokenizer into token ids, through the GPT model, which outputs next-token probabilities; a token is sampled and appended, and the loop repeats.">
 
-<div class="content">
-  <img src="{{ '/assets/img/llm-from-scratch/01_big_picture.svg' | relative_url }}" alt="Text goes through a tokenizer into token ids, through the GPT model, which outputs next-token probabilities; a token is sampled and appended, and the loop repeats.">
-
-  <p>Large language models can feel like magic. They are not. Underneath, a model like GPT is a few hundred lines of code that do one thing: predict the next token. In this series we write those lines ourselves, train the result on Shakespeare on an ordinary laptop, and look inside at every step.</p>
-  <p><strong>You need:</strong> Python, basic NumPy or PyTorch, and matrix multiplication. No GPU required.<br>
-  <strong>Code:</strong> <a href="https://github.com/ilameya/llm-from-scratch"><i class="fa-brands fa-github"></i> github.com/ilameya/llm-from-scratch</a>, one runnable script per part.</p>
-</div>
+<p>Large language models can feel like magic. They are not. Underneath, a model like GPT is a few hundred lines of code that do one thing: predict the next token. In this series we write those lines ourselves, train the result on Shakespeare on an ordinary laptop, and look inside at every step.</p>
+<p><strong>You need:</strong> Python, basic NumPy or PyTorch, and matrix multiplication. No GPU required.<br>
+<strong>Code:</strong> <a href="https://github.com/ilameya/llm-from-scratch"><i class="fa-brands fa-github"></i> github.com/ilameya/llm-from-scratch</a>, one runnable script per part.</p>
 
 {% assign series_posts = site.posts | where: "series", "llm-from-scratch" | sort: "part" %}
-<section class="pub-list">
+<ul class="post-list">
   {% for p in series_posts %}
-  <a class="pub-card series-card" href="{{ p.url | relative_url }}">
-    <div class="pub-icon part-num">{{ p.part }}</div>
-    <div class="pub-content">
-      <span class="pub-title">{{ p.title }}</span>
-      <span class="series-desc">{{ p.description }}</span>
-    </div>
-  </a>
+  <li>
+    <span class="num">Part {{ p.part }}</span>
+    <a class="title" href="{{ p.url | relative_url }}">{{ p.title }}</a>
+    <p>{{ p.description }}</p>
+  </li>
   {% endfor %}
-</section>
+</ul>
